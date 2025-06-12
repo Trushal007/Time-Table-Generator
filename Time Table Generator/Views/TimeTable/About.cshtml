@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        
+        h1, h2 {
+            color: #0056b3; 
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.6em;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+
+    
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style-type: disc; 
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+            ul li {
+                margin-bottom: 8px; 
+                color: #555; 
+            }
+
+        strong {
+            color: #0056b3; 
+        }
+
+        .note {
+            background-color: #e6f7ff; 
+            border-left: 5px solid #007bff;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #004085;
+        }
+
+       
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>How to Use Our Timetable Generator</h1>
+        <p>Creating your personalized weekly timetable is easy! Follow these simple steps to get started:</p>
+
+        <h2>Step 1: Define Your Weekly Structure</h2>
+        <ul>
+            <li>
+                <strong>Enter Your Working Days:</strong>
+                On the initial screen, you'll find a field for "Working Days."
+                Enter a number between <strong>1 and 7</strong> (e.g., '5' for a standard Monday-Friday schedule).
+            </li>
+            <li>
+                <strong>Specify Subjects Per Day:</strong>
+                Next, input the "Subjects per Day." This represents the number of periods or slots you have each working day.
+                Enter a positive number <strong>less than 9</strong> (e.g., '4' for four periods daily).
+            </li>
+            <li>
+                <strong>Indicate Total Subjects:</strong>
+                Finally, enter the "Total Subjects" you need to schedule for the entire week.
+                This should be a <strong>positive number</strong> (e.g., '4' if you have Gujarati, English, Science, and Maths).
+            </li>
+            <li>
+                <strong>Review Total Hours:</strong>
+                As you enter these values, the <strong>"Total hours for week"</strong> will automatically calculate. This is the total number of available slots in your timetable.
+                Ensure these details look correct, then click the <strong>"Submit"</strong> button to proceed.
+            </li>
+        </ul>
+
+        <h2>Step 2: Allocate Hours for Each Subject</h2>
+        <ul>
+            <li>
+                <strong>Subject Hour Input:</strong>
+                After submission, a new form will appear, listing each of your subjects (e.g., "Gujarati," "English," "Science," "Maths").
+                For each subject, enter the total number of hours (periods) you want to dedicate to it <strong>over the entire week</strong>.
+                <div class="note">
+                    <strong>For example:</strong> If "Total hours for week" is 20, you might enter: Gujarati 3, English 4, Science 6, Maths 7 (total 20).
+                </div>
+            </li>
+            <li>
+                <strong>Match Total Hours:</strong>
+                <strong>Important:</strong> The sum of all the hours you enter for your subjects *must exactly equal* the <strong>"Total hours for week"</strong> calculated in Step 1.
+                The system will guide you if there's a mismatch. Adjust your subject hours until the total matches.
+            </li>
+            <li>
+                <strong>Enable Generation:</strong>
+                Once your subject hours add up correctly, the <strong>"Generate"</strong> button will become enabled.
+            </li>
+        </ul>
+
+        <h2>Step 3: Generate Your Timetable!</h2>
+        <ul>
+            <li>
+                <strong>Click "Generate":</strong>
+                With the "Generate" button enabled, simply click it.
+            </li>
+            <li>
+                <strong>View Your Timetable:</strong>
+                The system will instantly create and display your personalized weekly timetable!
+                You'll see a clear grid with your subjects dynamically placed across your working days and periods.
+            </li>
+        </ul>
+
+    </div>
+</body>
+</html>

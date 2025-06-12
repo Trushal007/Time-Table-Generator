@@ -1,0 +1,98 @@
+﻿@model Time_Table_Generator.Models.TimeTableInputModel
+
+@{
+    ViewData["Title"] = "Time Table Generator Input";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/timetable.css" />
+</head>
+
+<div class="container-custom">
+    <h1 style="padding-bottom: 30px;margin-top: 0px;">Time Table Generator Input</h1>
+
+    <form id="initialInputForm" asp-action="EnterSubjectHours" method="post">
+        <div class="row mt-3">
+            <div class="form-group mb-3 col-md-4">
+                <label asp-for="NoOfWorkingDays" class="mb-2">Working Days</label>
+                <input asp-for="NoOfWorkingDays" class="form-control" />
+                <span asp-validation-for="NoOfWorkingDays" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-md-4">
+                <label asp-for="NoOfSubjectsPerDay" class="mb-2">Subjects Per Day</label>
+                <input asp-for="NoOfSubjectsPerDay" class="form-control" />
+                <span asp-validation-for="NoOfSubjectsPerDay" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-4">
+                <label asp-for="TotalSubjects" class="mb-2">Total Subjects</label>
+                <input asp-for="TotalSubjects" class="form-control" />
+                <span asp-validation-for="TotalSubjects" class="text-danger"></span>
+            </div>
+        </div>
+
+        <button type="button" id="calculateButton" class="btn btn-info mt-3">Calculate Total Hours</button>
+
+        <div id="totalHoursSection" class="form-group mt-3" style="display: none;">
+            <label>Total Hours for Week:</label>
+            <input type="text" id="totalHoursDisplay" name="TotalHoursOfWeek" class="form-control" readonly />
+            <input type="hidden" id="hiddenNoOfWorkingDays" name="NoOfWorkingDays" />
+            <input type="hidden" id="hiddenNoOfSubjectsPerDay" name="NoOfSubjectsPerDay" />
+            <input type="hidden" id="hiddenTotalSubjects" name="TotalSubjects" />
+            <button type="submit" id="submitButton" class="btn btn-primary mt-3">Submit</button>
+        </div>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger mt-3 validation" style="display: none;"></div>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function clearValidationMessages() {
+            $('.text-danger').text('');
+            $('.field-validation-error').removeClass('field-validation-error').addClass('field-validation-valid');
+            $('input').removeClass('input-validation-error');
+            $('.validation').hide();
+        }
+
+        $('#calculateButton').on('click', function () {
+            clearValidationMessages();
+
+            var noOfWorkingDays = parseInt($('#NoOfWorkingDays').val());
+            var noOfSubjectsPerDay = parseInt($('#NoOfSubjectsPerDay').val());
+            var totalSubjects = parseInt($('#TotalSubjects').val());
+
+            var isValid = true;
+            var validationSummaryErrors = [];
+
+            if (isNaN(noOfWorkingDays) || noOfWorkingDays < 1 || noOfWorkingDays > 7) {
+                $('#NoOfWorkingDays').next('.text-danger').text('Working days must be between 1 and 7.');
+                $('#NoOfWorkingDays').addClass('input-validation-error'); 
+                isValid = false;
+            }
+            if (isNaN(noOfSubjectsPerDay) || noOfSubjectsPerDay < 1 || noOfSubjectsPerDay > 8) {
+                $('#NoOfSubjectsPerDay').next('.text-danger').text('Subjects per day must be between 1 and 8.');
+                $('#NoOfSubjectsPerDay').addClass('input-validation-error');
+                isValid = false;
+            }
+            if (isNaN(totalSubjects) || totalSubjects < 1) {
+                $('#TotalSubjects').next('.text-danger').text('Total subjects must be a positive number.');
+                $('#TotalSubjects').addClass('input-validation-error');
+                isValid = false;
+            }
+
+            if (isValid) {
+                var totalHours = noOfWorkingDays * noOfSubjectsPerDay;
+                $('#totalHoursDisplay').val(totalHours);
+                $('#totalHoursSection').show();
+
+                $('#hiddenNoOfWorkingDays').val(noOfWorkingDays);
+                $('#hiddenNoOfSubjectsPerDay').val(noOfSubjectsPerDay);
+                $('#hiddenTotalSubjects').val(totalSubjects);
+
+            } else {
+                $('#totalHoursSection').hide();
+            }
+        });
+    });
+</script>

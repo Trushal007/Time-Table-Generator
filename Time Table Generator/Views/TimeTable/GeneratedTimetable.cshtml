@@ -1,0 +1,61 @@
+﻿@model Time_Table_Generator.Models.TimeTableViewModel
+
+@{
+    ViewData["Title"] = "Generated Timetable";
+}
+
+<head>
+    <link href="~/css/timetable.css" rel="stylesheet" />
+</head>
+
+<div class="container-custom">
+    <h1>Generated Timetable</h1>
+
+    <div class="timetable-summary-section">
+        <ul class="subject-breakdown-list">
+        <li><span class="subject-name">Working Days:</span>  <span class="subject-hours">@Model.NoOfWorkingDays</span></li>
+        <li><span class="subject-name">Subjects Per Day: </span>  <span class="subject-hours">@Model.NoOfSubjectsPerDay</span></li>
+        <li><span class="subject-name">Total Hours for Week:</span>  <span class="subject-hours">@Model.TotalHoursOfWeek</span></li>
+        </ul>
+    </div>
+
+    <h2>Subject Hours Breakdown:</h2>
+    <ul class="subject-breakdown-list">
+        @foreach (var subject in Model.SubjectDetails)
+        {
+            <li><span class="subject-name">@subject.SubjectName</span>: <span class="subject-hours">@subject.Hours hours</span></li>
+        }
+    </ul>
+
+    <h2>Your Timetable:</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped timetable-table">
+            <thead>
+                <tr>
+                    <th>Period</th>
+                    @for (int i = 1; i <= Model.NoOfWorkingDays; i++)
+                    {
+                        <th>Day @i</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (int row = 0; row < Model.NoOfSubjectsPerDay; row++)
+                {
+                    <tr>
+                        <td class="period-column">@((row + 1).ToString("00"))</td>
+                        @for (int col = 0; col < Model.NoOfWorkingDays; col++)
+                        {
+                            <td>@Model.Timetable[row, col]</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-info">Generate New Timetable</a>
+    </div>
+</div>
